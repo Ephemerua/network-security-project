@@ -97,11 +97,12 @@ void MainWindow::show_hex(int a, int b)
 void packet_table_init(Ui::MainWindow *ui)
 {
   ui->packet_table->setRowCount(0);
-  ui->packet_table->setColumnCount(6);
+  ui->packet_table->setColumnCount(7);
   ui->packet_table->setHorizontalHeaderLabels(QStringList() << QObject::tr("序号")
                                               << QObject::tr("源MAC地址") << QObject::tr("目的MAC地址")
-                                               << QObject::tr("帧类型")
-                                              << QObject::tr("源IP地址") << QObject::tr("目的IP地址"));
+                                              << QObject::tr("帧类型")
+                                              << QObject::tr("源IP地址") << QObject::tr("目的IP地址")
+                                              << QObject::tr("协议类型"));
 
 }
 
@@ -143,6 +144,22 @@ void MainWindow::insert_packet(packet* p)
           hw = QString::fromStdString(p->pdu->rfind_pdu<Tins::EthernetII>().dst_addr().to_string());
           item_p = new QTableWidgetItem(hw);
           table->setItem(row_id, 2, item_p);
+
+          switch(p->pdu->inner_pdu()->inner_pdu()->pdu_type())
+            {
+                case Tins::PDU::TCP:
+                    item_p = new QTableWidgetItem(QString("TCP"));
+                    table->setItem(row_id, 6, item_p);
+              break;
+            case Tins::PDU::UDP:
+                    item_p = new QTableWidgetItem(QString("UDP"));
+                    table->setItem(row_id, 6, item_p);
+               break;
+            default:
+              break;
+
+            }
+
 
        break;
      default:
