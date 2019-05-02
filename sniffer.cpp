@@ -9,9 +9,9 @@ bool SNIFFER_CONTINUE = true;
 
 bool packet_h(Tins::PDU* pp)
 {
-  packet p = packet(pp, nums);
-  packets.push_back(p);
-  w_ptr->insert_packet(&p);
+  packet* p = new packet(pp, nums);
+  packets.push_back(*p);
+  w_ptr->insert_packet(p);
   w_ptr->update();
 
   return SNIFFER_CONTINUE;

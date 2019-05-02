@@ -3,7 +3,7 @@
 
 packet::packet(Tins::PDU *pdu_ptr, int id)
 {
-    this->pdu = pdu_ptr;
+    this->pdu = pdu_ptr->clone();
     this->hex_content = NULL;
     this->id = id;
     unsigned int length = pdu_ptr->size();

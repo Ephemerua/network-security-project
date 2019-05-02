@@ -1,12 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMessageBox>s>
+#include <QMessageBox>
 #include <QMainWindow>
 #include <tins/tins.h>
 #include "packet.h"
 #include "sniffer.h"
-
+#include "util.h"
+#include <pdu.h>
 
 extern Tins::Sniffer* sniffer;
 extern std::vector<packet> packets;
@@ -38,6 +39,8 @@ public slots:
     void setFilter();
     void start_capture_wrapper();
     void stop_capture();
+    void show_raw(int a, int b);
+    void show_hex(int a, int b);
 
 private:
     Ui::MainWindow *ui;

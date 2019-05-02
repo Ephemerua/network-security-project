@@ -29,13 +29,15 @@ SOURCES += \
         mainwindow.cpp \
         packet.cpp \
         packet_table.cpp \
-        sniffer.cpp
+        sniffer.cpp \
+        util.cpp
 
 HEADERS += \
         mainwindow.h \
         packet.h \
         packet_table.h \
-        sniffer.h
+        sniffer.h \
+        util.h
 
 FORMS += \
         mainwindow.ui
